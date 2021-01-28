@@ -1,0 +1,4 @@
+If u are on windows https://chromedriver.storage.googleapis.com/88.0.4324.96/chromedriver_win32.zip
+(unzipped executable) in this folder.
+
+If u are on linux, don't worry about anything here.
