@@ -1,11 +1,13 @@
 package bestbuybotjava;
 
+import java.lang.Thread;
 import java.util.Scanner;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 
 
 public class Main {
@@ -35,18 +37,31 @@ public class Main {
                 testUrl = inputStream.next();
             }
         }
-        
+        driver.manage().window().maximize();
         driver.get(url);
         formattedPrinter("Successfully connected to " + url);
 
         WebDriverWait wait = new WebDriverWait(driver, 100);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[4]/div/div/h2")));
         formattedPrinter("Website fully loaded");
-        formattedPrinter("");
-
-        
-
-
+        formattedPrinter("Attempting to add to cart...");
+        while (true) {
+            WebElement hopefullyAddToCart = driver.findElement(By.xpath("/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[7]/div[1]/div/div/div/button"));
+            if (hopefullyAddToCart.getText().equals("Sold Out")) {
+                formattedPrinter("Sold Out!");
+                try {
+                    Thread.sleep(10000);
+                    driver.navigate().refresh();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                formattedPrinter("In Stock!");
+                hopefullyAddToCart.click();
+                break;
+            }
+        }
         inputStream.close();
     }
 
