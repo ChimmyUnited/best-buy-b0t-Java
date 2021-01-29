@@ -55,7 +55,13 @@ public class Main {
             WebElement hopefullyAddToCart = driver.findElement(By.xpath("/html/body/div[3]/main/div[2]/div[3]/div[2]/div/div/div[7]/div[1]/div/div/div/button"));
             //WebElement annoyingSurvey = driver.findElement(By.xpath(""));
             if (hopefullyAddToCart.getText().equals("Sold Out")) {
-                spinnyNotSold(driver, sold);
+                spinnyNotSold(sold);
+                try {
+                    Thread.sleep(10000);
+                    driver.navigate().refresh();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             else{
                 formattedPrinter("In Stock!");
@@ -70,22 +76,36 @@ public class Main {
         System.out.println(" *-*  " + string);
     }
 
-    public static void spinnyNotSold(WebDriver driver, String sold) {
-        System.out.println(" */*  " + sold);
+    public static void spinnyNotSold(String sold) {
         System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-        System.out.println(" *-*  " + sold);
-        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-        System.out.println(" *\\*  " + sold);
-        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-        System.out.println(" *|*  " + sold);
-        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
-        
+        System.out.print(" */*  " + sold);
         try {
-            Thread.sleep(10000);
-            driver.navigate().refresh();
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+        System.out.print(" *-*  " + sold);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+        System.out.print(" *\\*  " + sold);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+        System.out.print(" *|*  " + sold);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.print("\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b");
+        System.out.print(" */*  " + sold);
     }
 }
